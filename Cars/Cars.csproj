@@ -71,11 +71,20 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ListViewPrinter, Version=2.7.1.31255, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.2.7.1.5\lib\ListViewPrinter.dll</HintPath>
+    </Reference>
     <Reference Include="MoreLinq, Version=3.3.2.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.3.3.2\lib\net451\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView, Version=2.7.1.31255, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.2.7.1.5\lib\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="SparkleLibrary, Version=2.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.2.7.1.5\lib\SparkleLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -110,11 +119,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbConn.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCarModels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCarModels.Designer.cs">
+      <DependentUpon>FormCarModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCarProducers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCarProducers.Designer.cs">
+      <DependentUpon>FormCarProducers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCars.Designer.cs">
+      <DependentUpon>FormCars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEngineTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEngineTypes.Designer.cs">
+      <DependentUpon>FormEngineTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormJobs.Designer.cs">
+      <DependentUpon>FormJobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormJobTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormJobTypes.Designer.cs">
+      <DependentUpon>FormJobTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarModel.cs" />
@@ -124,6 +169,28 @@
     <Compile Include="Models\JobType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools.cs" />
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCarModels.resx">
+      <DependentUpon>FormCarModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCarProducers.resx">
+      <DependentUpon>FormCarProducers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCars.resx">
+      <DependentUpon>FormCars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEngineTypes.resx">
+      <DependentUpon>FormEngineTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormJobs.resx">
+      <DependentUpon>FormJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormJobTypes.resx">
+      <DependentUpon>FormJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

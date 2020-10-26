@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Cars.Models {
   public class Job {
+    public long Id { get; set; }
     public Car Car { get; set; }
     public DateTime TimeStamp { get; set; }
     public JobType Type { get; set; }
@@ -84,6 +85,69 @@ namespace Cars.Models {
       return result;
     }
 
+    public static List<Job> EnumerateJobs()
+    {
+      var sb = new StringBuilder();
+
+      void s(string x)
+      {
+        sb.Append($"{x}\n");
+      }
+
+      s("SELECT action_id, timestamp, jobs.job_id, jobs.name AS job_name, cars.car_id, plate, car_model_id, car_models.name AS car_name,");
+      s("car_models.engine_type_id AS engine_id, engine_types.name AS engine_name, color, car_producers.car_producer_id,");
+      s("car_producers.name AS producer_name");
+      s("FROM actions");
+      s("JOIN jobs ON actions.job_id = jobs.job_id");
+      s("JOIN cars ON cars.car_id = actions.car_id");
+      s("JOIN car_models ON cars.model_id = car_models.car_model_id");
+      s("JOIN car_producers ON car_models.producer_id = car_producers.car_producer_id");
+      s("JOIN engine_types ON car_models.engine_type_id = engine_types.engine_type_id");
+
+      var reader = DbConn.ExecuteReader(sb);
+      var result = new List<Job>();
+
+      while (reader.Read()) {
+        var producer = new CarProducer()
+        {
+          Id = (long)reader["car_producer_id"],
+          Name = (string)reader["producer_name"]
+        };
+        var engine = new EngineType()
+        {
+          Id = (long)reader["engine_id"],
+          ColorEncoding = Color.FromArgb((int)(long)reader["color"]),
+          Name = (string)reader["engine_name"],
+        };
+        var model = new CarModel()
+        {
+          Id = (long)reader["car_model_id"],
+          Name = (string)reader["car_name"],
+          CarProducer = producer,
+          EngineType = engine,
+        };
+        var car = new Car()
+        {
+          Id = (long)reader["car_id"],
+          LicensePlate = (string)reader["plate"],
+          Model = model,
+        };
+        var jobType = new JobType() {
+          Id = (long) reader["job_id"],
+          EngineTypes = null,
+          Name = (string) reader["job_name"]
+        };
+        var job = new Job() {
+          Id = (long) reader["action_id"],
+          Car = car,
+          TimeStamp = (DateTime) reader["timestamp"],
+          Type = jobType,
+        };
+        result.Add(job);
+      }
+      return result;
+    }
+
 
     public static void SeedDb() {
       var r = new Random(42);
@@ -95,7 +159,8 @@ namespace Cars.Models {
           var count = r.Next(5);
           for (int i = 0; i < count; i++) {
             InsertOne(car.Id, jobType.Id, ts);
-            ts += TimeSpan.FromHours(1);
+            ts += TimeSpan.FromHours(r.Next(200));
+            ts += TimeSpan.FromMinutes(r.Next(200));
           }
         }
       }

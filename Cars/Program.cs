@@ -39,14 +39,9 @@ namespace Cars
       Job.CreateTable();
       Job.SeedDb();
 
-      var cars = Car.EnumerateCars();
-      var jobs = Job.EnumerateJobs(cars[0]);
-
-
-      return;
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new Form1());
+      Application.Run(new FormMain());
     }
   }
 }

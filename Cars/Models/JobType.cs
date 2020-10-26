@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 
 namespace Cars.Models {
@@ -46,7 +47,7 @@ namespace Cars.Models {
     public static List<JobType> EnumerateJobTypes(EngineType type) {
       var sb = new StringBuilder();
       void s(string x) { sb.Append($"{x}\n"); }
-      s("SELECT* FROM jobs");
+      s("SELECT * FROM jobs");
       s("INNER JOIN link__jobs__engine_types ON jobs.job_id = link__jobs__engine_types.job_id");
       s("WHERE engine_type_id = @eid");
       var reader = DbConn.ExecuteReader(sb, new Dictionary<string, object> {{"@eid", type.Id}});
@@ -62,6 +63,33 @@ namespace Cars.Models {
       }
       return result;
     }
+
+    public static List<JobType> EnumerateJobTypes()
+    {
+      var possibleEngineTypes = EngineType.EnumerateTypes();
+      var sb = new StringBuilder();
+      void s(string x) { sb.Append($"{x}\n"); }
+      s("SELECT jobs.job_id, jobs.name, GROUP_CONCAT(engine_types.engine_type_id,',') as engine_types FROM jobs");
+      s("JOIN link__jobs__engine_types ON jobs.job_id = link__jobs__engine_types.job_id");
+      s("JOIN engine_types ON link__jobs__engine_types.engine_type_id = engine_types.engine_type_id");
+      s("GROUP BY jobs.job_id"); 
+      var reader = DbConn.ExecuteReader(sb);
+      var result = new List<JobType>();
+      while (reader.Read()) {
+        var typesString = (string) reader["engine_types"];
+        var types = typesString.Split(',')
+          .Select(x => possibleEngineTypes.First(y => y.Id.ToString() == x))
+          .ToArray();
+        result.Add(new JobType
+        {
+          Id = (long)reader["job_id"],
+          Name = (string)reader["name"],
+          EngineTypes = types,
+        });
+      }
+      return result;
+    }
+
 
     public static void SeedDb() {
       var engines = EngineType.EnumerateTypes();

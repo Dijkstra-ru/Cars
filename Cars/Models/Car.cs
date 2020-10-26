@@ -66,7 +66,7 @@ namespace Cars.Models {
       {
         var producer = new CarProducer()
         {
-          Id = (long)reader["car_model_id"],
+          Id = (long)reader["car_producer_id"],
           Name = (string)reader["producer"]
         };
         var engine = new EngineType()
