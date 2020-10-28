@@ -51,6 +51,10 @@ namespace Cars.Forms {
     }
 
     private void buttonCreate_Click(object sender, EventArgs e) {
+      if (CarModel.EnumerateCarModels().Count == 0) {
+        MessageBox.Show("Невозможно добавить автомобиль: не занесены модели (марки) автомобилей");
+        return;
+      }
       var form = new FormCreateModifyCar();
       var result = form.ShowDialog();
       if (result != DialogResult.OK) return;

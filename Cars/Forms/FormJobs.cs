@@ -58,6 +58,10 @@ namespace Cars.Forms {
     }
 
     private void buttonCreate_Click(object sender, EventArgs e) {
+      if (JobType.EnumerateJobTypes().Count == 0 || Car.EnumerateCars().Count == 0) {
+        MessageBox.Show("Не хватает данных для создания новой работы");
+        return;
+      }
       var form = new FormCreateModifyJob();
       var result = form.ShowDialog();
       if (result != DialogResult.OK) return;

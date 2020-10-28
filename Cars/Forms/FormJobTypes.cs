@@ -40,6 +40,10 @@ namespace Cars.Forms {
     }
 
     private void buttonCreate_Click(object sender, EventArgs e) {
+      if (EngineType.EnumerateTypes().Count == 0) {
+        MessageBox.Show("Не хватает данных для создания нового типа работ");
+        return;
+      }
       var form = new FormCreateModifyJobType();
       var result = form.ShowDialog();
       if (result != DialogResult.OK) return;

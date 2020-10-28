@@ -33,7 +33,7 @@ namespace Cars.ModalForms {
       SelectedEngines = selectedEngineTypes ?? new EngineType[] { };
       objectListViewEngineTypes.SetObjects(EngineType.EnumerateTypes());
       Tools.ResizeColumns(objectListViewEngineTypes);
-      foreach (var engineType in selectedEngineTypes) {
+      foreach (var engineType in SelectedEngines) {
         objectListViewEngineTypes.CheckObject(engineType);
       }
 

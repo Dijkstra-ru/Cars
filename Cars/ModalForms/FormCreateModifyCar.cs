@@ -18,7 +18,9 @@ namespace Cars.ModalForms {
     public FormCreateModifyCar(string plate = null, CarModel selectedModel = null) {
       InitializeComponent();
       comboBoxCarModels.Items.AddRange(CarModel.EnumerateCarModels().ToArray());
-      comboBoxCarModels.SelectedItem = selectedModel ?? comboBoxCarModels.Items[0];
+      if (comboBoxCarModels.Items.Count > 0) {
+        comboBoxCarModels.SelectedItem = selectedModel ?? comboBoxCarModels.Items[0];
+      }
       textBoxPlate.Text = plate ?? "";
     }
 
@@ -65,8 +67,8 @@ namespace Cars.ModalForms {
         @"^\D\d\d\d\d\d\d\d$", // Милицейский, 3 знака региона
       };
       var regexes = validPatterns.Select(x => new Regex(x));
-      if (!text.All(validSymbols.Contains)) return false;
-      if (regexes.Any(x => x.IsMatch(text))) return true;
+      if (!text.Trim().ToUpper().All(validSymbols.Contains)) return false;
+      if (regexes.Any(x => x.IsMatch(text.Trim().ToUpper()))) return true;
       return false;
     }
   }

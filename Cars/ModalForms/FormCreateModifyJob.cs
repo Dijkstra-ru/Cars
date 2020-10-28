@@ -18,14 +18,13 @@ namespace Cars.ModalForms {
     public FormCreateModifyJob(Car selectedCar = null, JobType selectedJobType = null, DateTime? selectedDate = null) {
       InitializeComponent();
       comboBoxCar.Items.AddRange(Car.EnumerateCars().ToArray());
-      comboBoxCar.SelectedItem = selectedCar ?? comboBoxCar.Items[0];
-      comboBoxJobType.SelectedItem = selectedJobType ?? comboBoxJobType.Items[0];
-      if (selectedDate.HasValue) {
-        dateTimePicker.Value = selectedDate.Value;
+      if (comboBoxCar.Items.Count > 0) {
+        comboBoxCar.SelectedItem = selectedCar ?? comboBoxCar.Items[0];
       }
-      else {
-        dateTimePicker.Value = DateTime.Today;
+      if (comboBoxJobType.Items.Count > 0) {
+        comboBoxJobType.SelectedItem = selectedJobType ?? comboBoxJobType.Items[0];
       }
+      dateTimePicker.Value = selectedDate ?? DateTime.Today;
     }
 
     private void comboBoxCar_SelectedIndexChanged(object sender, EventArgs e) {

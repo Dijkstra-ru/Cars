@@ -19,9 +19,13 @@ namespace Cars.ModalForms {
       string enteredName = null) {
       InitializeComponent();
       comboBoxEngines.Items.AddRange(EngineType.EnumerateTypes().ToArray());
-      comboBoxEngines.SelectedItem = selectedEngine ?? comboBoxEngines.Items[0];
+      if (comboBoxEngines.Items.Count > 0) {
+        comboBoxEngines.SelectedItem = selectedEngine ?? comboBoxEngines.Items[0];
+      }
       comboBoxCarProducers.Items.AddRange(CarProducer.EnumerateCarProducers().ToArray());
-      comboBoxCarProducers.SelectedItem = selectedProducer ?? comboBoxCarProducers.Items[0];
+      if (comboBoxCarProducers.Items.Count > 0) {
+        comboBoxCarProducers.SelectedItem = selectedProducer ?? comboBoxCarProducers.Items[0];
+      }
       textBoxName.Text = enteredName ?? "";
     }
 

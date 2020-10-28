@@ -53,6 +53,10 @@ namespace Cars.Forms {
     }
 
     private void buttonCreate_Click(object sender, EventArgs e) {
+      if (EngineType.EnumerateTypes().Count == 0 || CarProducer.EnumerateCarProducers().Count == 0) {
+        MessageBox.Show("Невозможно добавить модель машины: не заполнены необходимые данные");
+        return;
+      }
       var form = new FormCreateModifyCarModel();
       var result = form.ShowDialog();
       if (result != DialogResult.OK) return;
