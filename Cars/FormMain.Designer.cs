@@ -35,6 +35,7 @@
       this.видыРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.работыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.типыДвигателейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.сброситьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -46,7 +47,8 @@
             this.производителиМашинToolStripMenuItem,
             this.видыРаботToolStripMenuItem,
             this.работыToolStripMenuItem,
-            this.типыДвигателейToolStripMenuItem});
+            this.типыДвигателейToolStripMenuItem,
+            this.сброситьБДToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -95,6 +97,13 @@
       this.типыДвигателейToolStripMenuItem.Text = "Типы двигателей";
       this.типыДвигателейToolStripMenuItem.Click += new System.EventHandler(this.типыДвигателейToolStripMenuItem_Click);
       // 
+      // сброситьБДToolStripMenuItem
+      // 
+      this.сброситьБДToolStripMenuItem.Name = "сброситьБДToolStripMenuItem";
+      this.сброситьБДToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+      this.сброситьБДToolStripMenuItem.Text = "Сбросить БД";
+      this.сброситьБДToolStripMenuItem.Click += new System.EventHandler(this.сброситьБДToolStripMenuItem_Click);
+      // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,6 +130,7 @@
     private System.Windows.Forms.ToolStripMenuItem видыРаботToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem работыToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem типыДвигателейToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem сброситьБДToolStripMenuItem;
   }
 }
 

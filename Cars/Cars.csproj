@@ -161,6 +161,42 @@
     <Compile Include="Forms\FormJobTypes.Designer.cs">
       <DependentUpon>FormJobTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModalForms\FormCreateModifyCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyCar.Designer.cs">
+      <DependentUpon>FormCreateModifyCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyCarModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyCarModel.Designer.cs">
+      <DependentUpon>FormCreateModifyCarModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyCarProducer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyCarProducer.Designer.cs">
+      <DependentUpon>FormCreateModifyCarProducer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyEngineType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyEngineType.Designer.cs">
+      <DependentUpon>FormCreateModifyEngineType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyJob.Designer.cs">
+      <DependentUpon>FormCreateModifyJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyJobType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalForms\FormCreateModifyJobType.Designer.cs">
+      <DependentUpon>FormCreateModifyJobType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\CarProducer.cs" />
@@ -190,6 +226,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormJobTypes.resx">
       <DependentUpon>FormJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalForms\FormCreateModifyCar.resx">
+      <DependentUpon>FormCreateModifyCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalForms\FormCreateModifyCarModel.resx">
+      <DependentUpon>FormCreateModifyCarModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalForms\FormCreateModifyCarProducer.resx">
+      <DependentUpon>FormCreateModifyCarProducer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalForms\FormCreateModifyEngineType.resx">
+      <DependentUpon>FormCreateModifyEngineType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalForms\FormCreateModifyJob.resx">
+      <DependentUpon>FormCreateModifyJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalForms\FormCreateModifyJobType.resx">
+      <DependentUpon>FormCreateModifyJobType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

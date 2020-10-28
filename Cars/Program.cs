@@ -15,33 +15,10 @@ namespace Cars
     /// </summary>
     [STAThread]
     static void Main() {
-      EngineType.DropTable();
-      EngineType.CreateTable();
-      EngineType.SeedDb();
-      
-      JobType.DropTable();
-      JobType.CreateTable();
-      JobType.SeedDb();
-
-      CarProducer.DropTable();
-      CarProducer.CreateTable();
-      CarProducer.SeedDb();
-
-      CarModel.DropTable();
-      CarModel.CreateTable();
-      CarModel.SeedDb();
-
-      Car.DropTable();
-      Car.CreateTable();
-      Car.SeedDb();
-
-      Job.DropTable();
-      Job.CreateTable();
-      Job.SeedDb();
-
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new FormMain());
+      DbConn.Close();
     }
   }
 }

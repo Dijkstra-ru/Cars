@@ -8,9 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cars.Forms;
+using Cars.Models;
 
 namespace Cars {
   public partial class FormMain : Form {
+    /// <summary>
+    /// Делает активным окно заданного типа
+    /// </summary>
+    /// <typeparam name="TFormType">Тип окна для активации</typeparam>
+    /// <returns>true, если окно необходимо открыть заново</returns>
     private bool FocusChild<TFormType>() where TFormType : Form {
       var ot = MdiChildren.OfType<TFormType>().ToArray();
       if (ot.Length == 0) return true;
@@ -19,6 +25,10 @@ namespace Cars {
       return false;
     }
 
+    /// <summary>
+    /// Открывает окно заданного типа или делает уже открытое окно активным
+    /// </summary>
+    /// <typeparam name="TFormType"></typeparam>
     public void OpenForm<TFormType>() where TFormType : Form, new() {
       if (FocusChild<TFormType>()) {
         var f = new TFormType() {
@@ -45,23 +55,42 @@ namespace Cars {
       OpenForm<FormCarProducers>();
     }
 
-    private void видыРаботToolStripMenuItem_Click(object sender, EventArgs e)
-    {
+    private void видыРаботToolStripMenuItem_Click(object sender, EventArgs e) {
       OpenForm<FormJobTypes>();
-
     }
 
-    private void работыToolStripMenuItem_Click(object sender, EventArgs e)
-    {
+    private void работыToolStripMenuItem_Click(object sender, EventArgs e) {
       OpenForm<FormJobs>();
-
     }
 
-    private void типыДвигателейToolStripMenuItem_Click(object sender, EventArgs e)
-    {
+    private void типыДвигателейToolStripMenuItem_Click(object sender, EventArgs e) {
       OpenForm<FormEngineTypes>();
+    }
 
+    private void сброситьБДToolStripMenuItem_Click(object sender, EventArgs e) {
+      EngineType.DropTable();
+      EngineType.CreateTable();
+      EngineType.SeedDb();
 
+      JobType.DropTable();
+      JobType.CreateTable();
+      JobType.SeedDb();
+
+      CarProducer.DropTable();
+      CarProducer.CreateTable();
+      CarProducer.SeedDb();
+
+      CarModel.DropTable();
+      CarModel.CreateTable();
+      CarModel.SeedDb();
+
+      Car.DropTable();
+      Car.CreateTable();
+      Car.SeedDb();
+
+      Job.DropTable();
+      Job.CreateTable();
+      Job.SeedDb();
     }
   }
 }

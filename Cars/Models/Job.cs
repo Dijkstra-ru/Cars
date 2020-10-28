@@ -4,21 +4,37 @@ using System.Drawing;
 using System.Text;
 
 namespace Cars.Models {
+  /// <summary>
+  /// Модель описывает работу, проведённую с автомобилем
+  /// Класс содержит методы для работы с базой данных
+  /// </summary>
   public class Job {
+    /// <summary>
+    /// Первичный ключ в базе данных
+    /// </summary>
     public long Id { get; set; }
+
+    /// <summary>
+    /// Модель машины, над которой производилась работа
+    /// </summary>
     public Car Car { get; set; }
+
+    /// <summary>
+    /// Дата проведения работы
+    /// </summary>
     public DateTime TimeStamp { get; set; }
+
+    /// <summary>
+    /// Модель вида проведённой работы
+    /// </summary>
     public JobType Type { get; set; }
 
-    public static void CreateTable()
-    {
+    /// <summary>
+    /// Создаёт таблицу в базе данных
+    /// </summary>
+    public static void CreateTable() {
       var sb = new StringBuilder();
-
-      void s(string x)
-      {
-        sb.Append($"{x}\n");
-      }
-
+      void s(string x) => sb.Append($"{x}\n");
       s("CREATE TABLE actions (");
       s("action_id INTEGER PRIMARY KEY,");
       s("car_id INTEGER NOT NULL,");
@@ -30,19 +46,23 @@ namespace Cars.Models {
       DbConn.ExecuteNonQuery(sb);
     }
 
-    public static void DropTable()
-    {
+    /// <summary>
+    /// Уничтожает таблицу в базе данных
+    /// </summary>
+    public static void DropTable() {
       DbConn.ExecuteNonQuery("DROP TABLE IF EXISTS actions");
     }
 
+    /// <summary>
+    /// Добавляет новую запись о работе в базу данных
+    /// </summary>
+    /// <param name="carId">Идентификатор автомобиля, с которым была проведена работа</param>
+    /// <param name="jobId">Идентификатор вида работы</param>
+    /// <param name="timestamp">Дата проведения работы</param>
+    /// <returns>Присвоенный идентификатор работы</returns>
     public static long InsertOne(long carId, long jobId, DateTime timestamp) {
       var sb = new StringBuilder();
-
-      void s(string x)
-      {
-        sb.Append($"{x}\n");
-      }
-
+      void s(string x) => sb.Append($"{x}\n");
       s("INSERT INTO actions (car_id, job_id, timestamp)");
       s("VALUES (@car_id, @job_id, @timestamp);");
       s("SELECT last_insert_rowid();");
@@ -53,12 +73,15 @@ namespace Cars.Models {
       });
     }
 
-    public static List<Job> EnumerateJobs(Car car)
-    {
+    /// <summary>
+    /// Возвращает список работ, проведённых с конкретным автомобилем
+    /// </summary>
+    /// <param name="car">Автомобиль, для которого необходимо вернуть список работ</param>
+    /// <returns>Список работ, когда-либо проводимых с данным автомобилем</returns>
+    public static List<Job> EnumerateJobs(Car car) {
       var sb = new StringBuilder();
 
-      void s(string x)
-      {
+      void s(string x) {
         sb.Append($"{x}\n");
       }
 
@@ -67,11 +90,11 @@ namespace Cars.Models {
       s("JOIN jobs ON actions.job_id = jobs.job_id)");
       s("WHERE car_id = @car_id");
 
-      var reader = DbConn.ExecuteReader(sb, new Dictionary<string, object> {{"@car_id", car.Id} });
+      var reader = DbConn.ExecuteReader(sb, new Dictionary<string, object> {{"@car_id", car.Id}});
       var result = new List<Job>();
       while (reader.Read()) {
         var type = new JobType {
-          EngineTypes = new[]{ car.Model.EngineType},
+          EngineTypes = new[] {car.Model.EngineType},
           Id = (long) reader["job_id"],
           Name = (string) reader["name"],
         };
@@ -82,20 +105,21 @@ namespace Cars.Models {
         };
         result.Add(job);
       }
+
       return result;
     }
 
-    public static List<Job> EnumerateJobs()
-    {
+    /// <summary>
+    /// Возвращает полный список работ
+    /// </summary>
+    /// <returns>Список когда-либо проводившихся работ</returns>
+    public static List<Job> EnumerateJobs() {
       var sb = new StringBuilder();
-
-      void s(string x)
-      {
-        sb.Append($"{x}\n");
-      }
-
-      s("SELECT action_id, timestamp, jobs.job_id, jobs.name AS job_name, cars.car_id, plate, car_model_id, car_models.name AS car_name,");
-      s("car_models.engine_type_id AS engine_id, engine_types.name AS engine_name, color, car_producers.car_producer_id,");
+      void s(string x) => sb.Append($"{x}\n");
+      s(
+        "SELECT action_id, timestamp, jobs.job_id, jobs.name AS job_name, cars.car_id, plate, car_model_id, car_models.name AS car_name,");
+      s(
+        "car_models.engine_type_id AS engine_id, engine_types.name AS engine_name, color, car_producers.car_producer_id,");
       s("car_producers.name AS producer_name");
       s("FROM actions");
       s("JOIN jobs ON actions.job_id = jobs.job_id");
@@ -108,28 +132,24 @@ namespace Cars.Models {
       var result = new List<Job>();
 
       while (reader.Read()) {
-        var producer = new CarProducer()
-        {
-          Id = (long)reader["car_producer_id"],
-          Name = (string)reader["producer_name"]
+        var producer = new CarProducer() {
+          Id = (long) reader["car_producer_id"],
+          Name = (string) reader["producer_name"]
         };
-        var engine = new EngineType()
-        {
-          Id = (long)reader["engine_id"],
-          ColorEncoding = Color.FromArgb((int)(long)reader["color"]),
-          Name = (string)reader["engine_name"],
+        var engine = new EngineType() {
+          Id = (long) reader["engine_id"],
+          ColorEncoding = Color.FromArgb((int) (long) reader["color"]),
+          Name = (string) reader["engine_name"],
         };
-        var model = new CarModel()
-        {
-          Id = (long)reader["car_model_id"],
-          Name = (string)reader["car_name"],
+        var model = new CarModel() {
+          Id = (long) reader["car_model_id"],
+          Name = (string) reader["car_name"],
           CarProducer = producer,
           EngineType = engine,
         };
-        var car = new Car()
-        {
-          Id = (long)reader["car_id"],
-          LicensePlate = (string)reader["plate"],
+        var car = new Car() {
+          Id = (long) reader["car_id"],
+          LicensePlate = (string) reader["plate"],
           Model = model,
         };
         var jobType = new JobType() {
@@ -145,10 +165,13 @@ namespace Cars.Models {
         };
         result.Add(job);
       }
+
       return result;
     }
 
-
+    /// <summary>
+    /// Заполняет базу данных тестовыми значениями
+    /// </summary>
     public static void SeedDb() {
       var r = new Random(42);
       var cars = Car.EnumerateCars();
@@ -166,5 +189,36 @@ namespace Cars.Models {
       }
     }
 
+    /// <summary>
+    /// Удаляет работу из списка
+    /// </summary>
+    /// <param name="id"></param>
+    public static void RemoveOne(long id) {
+      DbConn.ExecuteNonQuery("DELETE FROM actions WHERE action_id = @aid",
+        new Dictionary<string, object> {{"@aid", id}});
+    }
+
+    /// <summary>
+    /// Обновляет запись о работе в базе данных
+    /// </summary>
+    /// <param name="id">Идентификатор работы</param>
+    /// <param name="carId">Идентификатор автомобиля, с которым проводилась работа</param>
+    /// <param name="jobId">Идентификатор типа работы</param>
+    /// <param name="timestamp">Дата проведения работы</param>
+    public static void ModifyOne(long id, long carId, long jobId, DateTime timestamp) {
+      var sb = new StringBuilder();
+      void s(string x) => sb.Append($"{x}\n");
+      s("UPDATE actions SET");
+      s("car_id = @cid,");
+      s("job_id = @jid,");
+      s("timestamp = @ts");
+      s("WHERE action_id = @aid");
+      DbConn.ExecuteNonQuery(sb, new Dictionary<string, object> {
+        {"@cid", carId},
+        {"@jid", jobId},
+        {"@ts", timestamp},
+        {"@aid", id}
+      });
+    }
   }
 }

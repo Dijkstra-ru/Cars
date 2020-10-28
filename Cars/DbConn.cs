@@ -9,9 +9,17 @@ using Cars.Models;
 
 namespace Cars {
   public static class DbConn {
+    /// <summary>
+    /// true, если подключение к базе данных открыто
+    /// </summary>
     private static bool isOpened { get; set; }
+    /// <summary>
+    /// Объект подключения к базе данных
+    /// </summary>
     private static SQLiteConnection connection { get; set; }
-
+    /// <summary>
+    /// Создать таблицы в базе данных
+    /// </summary>
     private static void createTables() {
       EngineType.CreateTable();
       JobType.CreateTable();
@@ -19,7 +27,9 @@ namespace Cars {
       CarModel.CreateTable();
       Car.CreateTable();
     }
-
+    /// <summary>
+    /// Уничтожить таблицы в базе данных
+    /// </summary>
     private static void dropTables() {
       Car.DropTable();
       CarModel.DropTable();
@@ -27,7 +37,10 @@ namespace Cars {
       JobType.DropTable();
       EngineType.DropTable();
     }
-
+    /// <summary>
+    /// Открывает подключение к базе данных
+    /// </summary>
+    /// <param name="fileName">Имя файла с базой данных</param>
     public static void Open(string fileName) {
       try {
         if (!File.Exists(fileName)) {
@@ -43,6 +56,9 @@ namespace Cars {
         throw;
       }
     }
+    /// <summary>
+    /// Закрывает подключение к базе данных
+    /// </summary>
     public static void Close() {
       isOpened = false;
       connection.Close();
