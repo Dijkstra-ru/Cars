@@ -26,11 +26,13 @@ namespace Cars {
       CarProducer.CreateTable();
       CarModel.CreateTable();
       Car.CreateTable();
+      Job.CreateTable();
     }
     /// <summary>
     /// Уничтожить таблицы в базе данных
     /// </summary>
     private static void dropTables() {
+      Job.DropTable();
       Car.DropTable();
       CarModel.DropTable();
       CarProducer.DropTable();

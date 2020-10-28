@@ -4,6 +4,10 @@ using BrightIdeasSoftware;
 
 namespace Cars {
   public static class Tools {
+    /// <summary>
+    // Первичная настройка ObjectListView
+    /// </summary>
+    /// <param name="olv">ObjectListView для первичной настройки</param>
     public static void SetUpOlv(ObjectListView olv) {
       olv.MultiSelect = true;
       olv.ShowGroups = false;
