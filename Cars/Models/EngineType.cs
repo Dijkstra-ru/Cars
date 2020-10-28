@@ -29,7 +29,7 @@ namespace Cars.Models {
       var sb = new StringBuilder();
       void s(string x) => sb.Append($"{x}\n");
       s("CREATE TABLE engine_types (");
-      s("engine_type_id INTEGER PRIMARY KEY,");
+      s("engine_type_id INTEGER PRIMARY KEY AUTOINCREMENT,");
       s("color INTEGER NOT NULL,");
       s("name TEXT NOT NULL");
       s(")");

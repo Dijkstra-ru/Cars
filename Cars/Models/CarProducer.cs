@@ -24,7 +24,7 @@ namespace Cars.Models {
       var sb = new StringBuilder();
       void s(string x) => sb.Append($"{x}\n");
       s("CREATE TABLE car_producers (");
-      s("car_producer_id INTEGER PRIMARY KEY,");
+      s("car_producer_id INTEGER PRIMARY KEY AUTOINCREMENT,");
       s("name TEXT NOT NULL");
       s(");");
       DbConn.ExecuteNonQuery(sb);

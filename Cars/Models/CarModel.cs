@@ -35,7 +35,7 @@ namespace Cars.Models {
       var sb = new StringBuilder();
       void s(string x) => sb.Append($"{x}\n");
       s("CREATE TABLE car_models (");
-      s("car_model_id INTEGER PRIMARY KEY,");
+      s("car_model_id INTEGER PRIMARY KEY AUTOINCREMENT,");
       s("name TEXT NOT NULL,");
       s("producer_id INTEGER NOT NULL,");
       s("engine_type_id INTEGER NOT NULL,");

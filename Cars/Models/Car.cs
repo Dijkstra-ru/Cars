@@ -29,7 +29,7 @@ namespace Cars.Models {
       var sb = new StringBuilder();
       void s(string x) => sb.Append($"{x}\n");
       s("CREATE TABLE cars (");
-      s("car_id INTEGER PRIMARY KEY,");
+      s("car_id INTEGER PRIMARY KEY AUTOINCREMENT,");
       s("model_id INTEGER NOT NULL,");
       s("plate TEXT NOT NULL,");
       s("FOREIGN KEY (model_id) REFERENCES car_models (car_model_id)");

@@ -31,13 +31,13 @@ namespace Cars.Models {
       var sb = new StringBuilder();
       void s(string x) => sb.Append($"{x}\n");
       s("CREATE TABLE jobs (");
-      s("job_id INTEGER PRIMARY KEY,");
+      s("job_id INTEGER PRIMARY KEY AUTOINCREMENT,");
       s("name TEXT NOT NULL");
       s(");");
       DbConn.ExecuteNonQuery(sb);
       sb.Clear();
       s("CREATE TABLE link__jobs__engine_types (");
-      s("link_id INTEGER PRIMARY KEY,");
+      s("link_id INTEGER PRIMARY KEY AUTOINCREMENT,");
       s("job_id INTEGER NOT NULL,");
       s("engine_type_id INTEGER NOT NULL,");
       s("FOREIGN KEY (job_id) REFERENCES jobs (job_id),");
